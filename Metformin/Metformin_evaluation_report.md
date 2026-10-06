@@ -1,8 +1,8 @@
 # Building and evaluation of a PBPK model for Metformin in healthy adults
 
-| Version                                         | 1.0-OSP12.2                                                   |
+| Version                                         | master-OSP12.2                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------ |
-| based on *Model Snapshot* and *Evaluation Plan* | https://github.com/Open-Systems-Pharmacology/Metformin-Model/releases/tag/v1.0 |
+| based on *Model Snapshot* and *Evaluation Plan* | https://github.com/Open-Systems-Pharmacology/Metformin-Model/releases/tag/vmaster |
 | OSP Version                                     | 12.2                                                          |
 | Qualification Framework Version                 | 3.5                                                          |
 
@@ -34,17 +34,12 @@ https://github.com/Open-Systems-Pharmacology/OSP-PBPK-Model-Library/
 
 # 1 Introduction<a id="1"></a>
 
-The presented model building and evaluation report evaluates the performance of a PBPK model for metformin in healthy adults.
+Hello Hello. The presented model building and evaluation report evaluates the performance of a PBPK model for metformin in healthy adults.
 
-The herein presented model was developed and published by Hanke et al. ([Hanke 2020](#5-references)) and adjusted later on to PK-Sim V11 by re-optimizing OCT2.
+The herein presented model represents an update of the metformin model published by Hanke et al. ([Hanke 2020](#5-references)).  
 
 Metformin is widely used as first-line treatment of type 2 diabetes. It is a highly hydrophilic compound, positively
-charged at physiological pH and depends on active transport for its absorption, distribution and
-excretion. The absorption of metformin is saturable and reported to be restricted to the upper
-intestine ([Vidon 1988](#5-references)). The excretion of metformin is mainly mediated via the sequential action of OCT2 and
-MATE in the kidney, with a moderate contribution of renal glomerular filtration (approximately
-20 %). Metformin is recommended by the FDA as OCT2/MATE victim drug for the use in clinical
-DDI studies and drug labeling ([FDA 2017](#5-references)).
+charged at physiological pH and depends on active transport for its absorption, distribution and excretion. The absorption of metformin is saturable and reported to be restricted to the upper intestine ([Vidon 1988](#5-references)). The excretion of metformin is mainly mediated via the sequential action of OCT2 and MATE in the kidney, with a moderate contribution of renal glomerular filtration (approximately 20 %). Metformin is recommended by the FDA as OCT2/MATE victim drug for the use in clinical DDI studies and drug labeling ([FDA 2017](#5-references)).
 
 The herein presented PBPK model of metformin PBPK model has been developed and evaluated by comparing simulations to observed data of both intravenously and orally administered metformin covering a dosing range from 0.001 to 2550 mg.
 
@@ -72,7 +67,7 @@ Virtual mean individuals were generated for each study according to the publishe
 
 The clinical datasets for metformin PBPK modeling were divided into a model building dataset for model building and a test dataset for model evaluation and verification. Both datasets are presented in [Section 2.2](#22-data-used).
 
-A specific set of parameters ([Section 2.3.4.](#model-parameters-and-assumptions-identification)) were optimized to describe the disposition of metformin using the Parameter Identification module provided in PK-Sim®. To limit the parameters to be optimized during model building, the minimal number of processes necessary to mechanistically describe the pharmacokinetics and drug-drug interactions (DDIs) of the modeled drugs were implemented into the models. The saturable absorption is implemented via PMAT and OCT1 in the small intestine. As late absorption of orally administered metformin is neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. Furthermore, no information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained. Therefore, the passive permeability from the intracellular to the interstitial space of the small intestinal mucosa was optimized.
+A specific set of parameters ([Section 2.3.4.](#model-parameters-and-assumptions-identification)) were optimized to describe the disposition of metformin using the Parameter Identification module provided in PK-Sim®. To limit the parameters to be optimized during model building, the minimal number of processes necessary to mechanistically describe the pharmacokinetics and drug-drug interactions (DDIs) of the modeled drugs were implemented into the models. The saturable absorption is implemented via PMAT and OCT1 in the small intestine. As late absorption of orally administered metformin is neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. For an improved capture of terminal half-life and to minimize drug accumulation over time in tissues the permeability calculation methods and selected specific permeabilities were optimized (i.e., liver, kidney, mucosa, and brain). No information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained. Therefore, the passive permeability from the intracellular to the interstitial space of the small intestinal mucosa was optimized. Metformin is primarily absorbed from the small intestine ([Marathe 2000](#5-references)). In the updated model, to minimize absorption in the large intestine without causing accumulation of the drug inside of the intracellular space of the mucosa, the solubility in the distal Colon and rectum was set to 0 mg/l. While solubility is not the underlying cause of limited absorption in vivo, this adjustment was used as a practical modeling workaround. Finally, in the latest version of the model, meal events were introduced for the fed state simulations. 
 
 Details about input data (physicochemical, *in vitro* and clinical) can be found in [Section 2.2](#22-data-used).
 
@@ -169,9 +164,11 @@ The dissolution of tablets was implemented via empirical Weibull dissolution.
 
 Metformin is not bound to plasma proteins (fu = 100 %) (see [Section 2.2.1](#invitro-and-physico-chemical-data)) ([Sirtori 1978](#5-references), [Pentikäinen 1979](#5-references) and [Tucker 1981](#5-references)). A value of 100% was used in this PBPK model for `Fraction unbound (plasma, reference value)`. The major binding partner was set to albumin (see [Section 2.2.1](#invitro-and-physico-chemical-data)).
 
-An important parameter influencing the resulting volume of distribution is lipophilicity. The reported experimental logP of -1.43 was used in this model (see [Section 2.2.1](#in-vitro-and-physicochemical-data)). 
+An important parameter influencing the resulting volume of distribution is lipophilicity. The reported experimental logP of -1.43 was used in this model (see [Section 2.2.1](#invitro-and-physico-chemical-data)). 
 
-After testing the available organ-plasma partition coefficient and cell permeability calculation methods built in PK-Sim®, observed clinical data was best described by choosing the partition coefficient calculation by `PK-SIM Standard` and cellular permeability calculation by `Charged dependent Schmitt normalized to PK-SIM`.
+After testing the available organ-plasma partition coefficient and cell permeability calculation methods built in PK-Sim®, observed clinical data was best described by choosing the partition coefficient calculation by `PK-SIM Standard` and cellular permeability calculation by `PK-SIM Standard`.
+
+The liver, kidney and brain permeabilities (i.e., (`(P (intracellular -> interstitial) liver periportal`, `(P (intracellular -> interstitial) liver pericentral` and (`(P (intracellular -> interstitial) kidney`) were optimized to avoid accumulation of drug in tissue and to capture observed PK profiles [Section 2.3.4](#model-parameters-and-assumptions-identification). 
 
 ### 2.3.3 Metabolism and Elimination<a id="model-parameters-and-assumptions-metabolism"></a>
 
@@ -198,20 +195,22 @@ Additionally, passive renal clearance by glomerular filtration was implemented a
 
 ### 2.3.4 Automated Parameter Identification<a id="model-parameters-and-assumptions-identification"></a>
 
-The following parameters have been estimated in the model:
+This is the result of the final parameter identification.
 
-| Model Parameter                |
-| ------------------------------ | 
-| `Km` (PMAT)             | 
-| `kcat` (PMAT)             | 
-| `kcat` (OCT1)            |
-| `kcat` (OCT2)                    | 
-| `kcat` (MATE1)                    | 
-| `Specific intestinal permeability`| 
-| `Basolateral small intestinal permeability`| 
-| `Basolateral large intestinal permeability`| 
-| `Tablet dissolution fed Weibull Shape`|
-| `Tablet dissolution fed Weibull Time`|
+| Model Parameter      | Optimized Value | Unit |
+| -------------------- | --------------- | ---- |
+| `kcat` (PMAT)             | 76.47|1/min|
+| `Km` (PMAT)             |367.57 | µmol/l |
+| `kcat` (OCT1)            | 641.19 | 1/min |
+| `kcat` (OCT2)                    | 17479.74 | 1/min |
+| `kcat` (MATE1)                    | 165.69 | 1/min |
+| `P(intracellular-interstitial) Kidney`| 4.02E-06 | cm/min |
+| `P(intracellular-interstitial) Liver`|4.83E-05 | cm/min |
+| `P(intracellular-interstitial) Brain`|0.02 | cm/min |
+| `Specific intestinal permeability`| 8.49E-07 | cm/min |
+| `P(intracellular-interstitial) mucosa` (Basolateral intestinal permeability)| 2.25E-05 | cm/min |
+| `Tablet dissolution fed Weibull Shape`| 0.08 | - |
+| `Tablet dissolution fed Weibull Time`| 7.90 | min |
 
  
 
@@ -244,10 +243,10 @@ Plasma protein binding partner                   | Albumin                 |    
 
 #### Calculation methods
 
-Name                    | Value                                        
------------------------ | ---------------------------------------------
-Partition coefficients  | PK-Sim Standard                              
-Cellular permeabilities | Charge dependent Schmitt normalized to PK-Sim
+Name                    | Value          
+----------------------- | ---------------
+Partition coefficients  | PK-Sim Standard
+Cellular permeabilities | PK-Sim Standard
 
 #### Processes
 
@@ -322,11 +321,11 @@ The first plot shows observed versus simulated plasma concentration, the second 
 
 |Group                                              |GMFE |
 |:--------------------------------------------------|:----|
-|Metformin iv (model building)                      |1.24 |
-|Metformin iv (model verification)                  |1.23 |
-|Metformin oral administration (model building)     |1.37 |
-|Metformin oral administration (model verification) |1.43 |
-|All                                                |1.39 |
+|Metformin iv (model building)                      |1.89 |
+|Metformin iv (model verification)                  |2.23 |
+|Metformin oral administration (model building)     |1.57 |
+|Metformin oral administration (model verification) |1.74 |
+|All                                                |1.73 |
 
 <br>
 <br>
@@ -375,335 +374,533 @@ Simulated versus observed concentration-time profiles of all data listed in [Sec
 
 <a id="figure-3-5"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/3_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
+![](images/006_section_3/009_section_33/010_section_331/3_time_profile_plot_Metformin_iv__250_mg__Tucker_1981__n_4.png)
 
-**Figure 3-5: Metformin - iv, 1000 mg_Sirtori 1978**
+**Figure 3-5: Metformin - iv, 250 mg_Tucker 1981 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-6"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/4_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/4_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
 
-**Figure 3-6: Metformin - po (sol) 10 mg_Stopfer 2018**
+**Figure 3-6: Metformin - iv, 1000 mg_Sirtori 1978**
 
 <br>
 <br>
 
 <a id="figure-3-7"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/5_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/5_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
 
-**Figure 3-7: Metformin - po (sol) 500 mg_Boehringer 2018**
+**Figure 3-7: Metformin - iv, 1000 mg_Sirtori 1978 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-8"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/6_time_profile_plot_Metformin_po___0_0008_mg__Gormsen_2016__n_3__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/6_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
 
-**Figure 3-8: Metformin - po (sol) 0.0008 mg, Gormsen 2016**
+**Figure 3-8: Metformin - po (sol) 10 mg_Stopfer 2018**
 
 <br>
 <br>
 
 <a id="figure-3-9"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/7_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/7_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
 
-**Figure 3-9: Metformin - po (tab) 500 mg_Stopfer 2016**
+**Figure 3-9: Metformin - po (sol) 10 mg_Stopfer 2018 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-10"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/8_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/8_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
 
-**Figure 3-10: Metformin - po (sol) 850 mg_Sambol 1996b**
+**Figure 3-10: Metformin - po (sol) 500 mg_Boehringer 2018**
 
 <br>
 <br>
 
 <a id="figure-3-11"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/9_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/9_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
 
-**Figure 3-11: Metformin - po (tab) 850 mg_Sambol 1996b**
+**Figure 3-11: Metformin - po (sol) 500 mg_Boehringer 2018 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-12"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/10_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/10_time_profile_plot_Metformin_po___0_0008_mg__Gormsen_2016__n_3__sol__fast.png)
 
-**Figure 3-12: Metformin - po (tab) 850 mg_Sambol 1996a**
+**Figure 3-12: Metformin - po (sol) 0.0008 mg, Gormsen 2016**
 
 <br>
 <br>
 
 <a id="figure-3-13"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/11_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/11_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
 
-**Figure 3-13: Metformin - po (tab) 0.1700 mg_Sambol 1996a**
+**Figure 3-13: Metformin - po (tab) 500 mg_Stopfer 2016**
 
 <br>
 <br>
 
 <a id="figure-3-14"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/12_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/12_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
 
-**Figure 3-14: Metformin - po (tab) 2550 mg_Sambol 1996a**
+**Figure 3-14: Metformin - po (tab) 500 mg_Stopfer 2016 - fe urine**
 
 <br>
 <br>
-
-### 3.3.2 Model Verification<a id="332"></a>
 
 <a id="figure-3-15"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/13_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
+![](images/006_section_3/009_section_33/010_section_331/13_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
 
-**Figure 3-15: Metformin - iv 500 mg_Pentikainen 1979**
+**Figure 3-15: Metformin - po (sol) 850 mg_Sambol 1996b**
 
 <br>
 <br>
 
 <a id="figure-3-16"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/14_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/14_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
 
-**Figure 3-16: Metformin - po (tab) 250 mg_Somogyi 1987**
+**Figure 3-16: Metformin - po (sol) 850 mg_Sambol 1996b - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-17"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/15_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/15_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
 
-**Figure 3-17: Metformin - po (tablet) 500 mg_Wang 2008**
+**Figure 3-17: Metformin - po (tab) 850 mg_Sambol 1996b**
 
 <br>
 <br>
 
 <a id="figure-3-18"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/16_time_profile_plot_Metformin_po__500_mg__Caille_1993__n_24__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/16_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
 
-**Figure 3-18: Metformin - po (tab) 500 mg_Caille 1993**
+**Figure 3-18: Metformin - po (tab) 850 mg_Sambol 1996b - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-19"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/17_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/17_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
 
-**Figure 3-19: Metformin - po (tab) 500 mg_Gusler 2001**
+**Figure 3-19: Metformin - po (tab) 850 mg_Sambol 1996a**
 
 <br>
 <br>
 
 <a id="figure-3-20"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/18_time_profile_plot_Metformin_po__500_mg__Najib_2002__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/18_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
 
-**Figure 3-20: Metformin - po (tab) 500 mg_Najib 2002**
+**Figure 3-20: Metformin - po (tab) 850 mg_Sambol 1996a - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-21"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/19_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/19_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-21: Metformin - po (tab) 500 mg_Pentikainen 1979**
+**Figure 3-21: Metformin - po (tab) 1700 mg_Sambol 1996a**
 
 <br>
 <br>
 
 <a id="figure-3-22"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/20_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/20_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-22: Metformin - po (tab) 500 mg_Sambol 1996b**
+**Figure 3-22: Metformin - po (tab) 1700 mg_Sambol 1996a - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-23"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/21_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/21_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-23: Metformin - po (tab) 500 mg_Tucker 1981**
+**Figure 3-23: Metformin - po (tab) 2550 mg_Sambol 1996a**
 
 <br>
 <br>
 
 <a id="figure-3-24"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/22_time_profile_plot_Metformin_po__500_mg__DiCicco_2000__n_16__tab__fed.png)
+![](images/006_section_3/009_section_33/010_section_331/22_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-24: Metformin - po (tab) 500 mg_DiCicco 2000**
+**Figure 3-24: Metformin - po (tab) 2550 mg_Sambol 1996a - fe urine**
 
 <br>
 <br>
+
+### 3.3.2 Model Verification<a id="332"></a>
 
 <a id="figure-3-25"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/23_time_profile_plot_Metformin_po__500_mg__Jang_2016__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/23_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
 
-**Figure 3-25: Metformin - po (tab) 500 mg_Jan 2016**
+**Figure 3-25: Metformin - iv 500 mg_Pentikainen 1979**
 
 <br>
 <br>
 
 <a id="figure-3-26"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/24_time_profile_plot_Metformin_po__500_mg__Kim_2014__n_23__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/24_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
 
-**Figure 3-26: Metformin - po (tab) 500 mg_Kim 2014**
+**Figure 3-26: Metformin - iv 500 mg_Pentikainen 1979 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-27"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/25_time_profile_plot_Metformin_po__500_mg__Manitpisitkul_2014__n_18__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/25_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
 
-**Figure 3-27: Metformin - po (tab) 500 mg_Manitpisitkul 2014**
+**Figure 3-27: Metformin - po (tab) 250 mg_Somogyi 1987**
 
 <br>
 <br>
 
 <a id="figure-3-28"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/26_time_profile_plot_Metformin_po__500_mg__Oh_2016__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/26_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
 
-**Figure 3-28: Metformin - po (tab) 500 mg_Oh 2016**
+**Figure 3-28: Metformin - po (tab) 250 mg_Somogyi 1987 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-29"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/27_time_profile_plot_Metformin_po__750_mg__Cho_2011__n_16__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/27_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
 
-**Figure 3-29: Metformin - po (tab) 750 mg_Cho 2011**
+**Figure 3-29: Metformin - po (tablet) 500 mg_Wang 2008**
 
 <br>
 <br>
 
 <a id="figure-3-30"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/28_time_profile_plot_Metformin_po__750_mg__Cho_2014__n_12__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/28_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
 
-**Figure 3-30: Metformin - po (tab) 750 mg_Cho 2014**
+**Figure 3-30: Metformin - po (tablet) 500 mg_Wang 2008 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-31"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/29_time_profile_plot_Metformin_po__750_mg__Ding_2014__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/29_time_profile_plot_Metformin_po__500_mg__Caille_1993__n_24__tab__fed.png)
 
-**Figure 3-31: Metformin - po (tab) 750 mg tid_Ding 2014**
+**Figure 3-31: Metformin - po (tab) 500 mg_Caille 1993**
 
 <br>
 <br>
 
 <a id="figure-3-32"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/30_time_profile_plot_Metformin_po__850_mg__Chen_2009__n_14__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/30_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
 
-**Figure 3-32: Metformin - po (tab) 850 mg_Chen 2009**
+**Figure 3-32: Metformin - po (tab) 500 mg_Gusler 2001**
 
 <br>
 <br>
 
 <a id="figure-3-33"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/31_time_profile_plot_Metformin_po__850_mg__Robert_2003__WholeBlood__n_6__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/31_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
 
-**Figure 3-33: Metformin - po (tab) 850 mg_Robert 2003**
+**Figure 3-33: Metformin - po (tab) 500 mg_Gusler 2001 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-34"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/32_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/32_time_profile_plot_Metformin_po__500_mg__Najib_2002__n_24__tab__fast.png)
 
-**Figure 3-34: Metformin - po (tab) 850 mg_Sambol 1995**
+**Figure 3-34: Metformin - po (tab) 500 mg_Najib 2002**
 
 <br>
 <br>
 
 <a id="figure-3-35"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/33_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/33_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
 
-**Figure 3-35: Metformin - po (tab) 850 mg_Sambol 1996a**
+**Figure 3-35: Metformin - po (tab) 500 mg_Pentikainen 1979**
 
 <br>
 <br>
 
 <a id="figure-3-36"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/34_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/34_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
 
-**Figure 3-36: Metformin - po (tab) 850 mg_Hibma 2016**
+**Figure 3-36: Metformin - po (tab) 500 mg_Pentikainen 1979 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-37"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/35_time_profile_plot_Metformin_po__850_mg_tid__Sambol_1996a__n_9__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/35_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
 
-**Figure 3-37: Metformin - po (tab) 850 mg tid_Sambol 1996a**
+**Figure 3-37: Metformin - po (tab) 500 mg_Sambol 1996b**
 
 <br>
 <br>
 
 <a id="figure-3-38"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/36_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/36_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
 
-**Figure 3-38: Metformin - po (tab) 1000 mg_Johansson 2014**
+**Figure 3-38: Metformin - po (tab) 500 mg_Sambol 1996b - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-39"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/37_time_profile_plot_Metformin_po_1000_mg__Gan_2016__n_27__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/37_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
 
-**Figure 3-39: Metformin - po (tab) 1000 mg_Gan 2016**
+**Figure 3-39: Metformin - po (tab) 500 mg_Tucker 1981**
 
 <br>
 <br>
 
 <a id="figure-3-40"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/38_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/38_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
 
-**Figure 3-40: Metformin - po (tab) 1500 mg_Tucker 1981**
+**Figure 3-40: Metformin - po (tab) 500 mg_Tucker 1981 - fe urine**
 
 <br>
 <br>
 
 <a id="figure-3-41"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/39_time_profile_plot_Metformin_po__850_mg__Morrissey_2016__n_12__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/39_time_profile_plot_Metformin_po__500_mg__DiCicco_2000__n_16__tab__fed.png)
 
-**Figure 3-41: Metformin - po (tab) 850 mg_Morrissey 2016**
+**Figure 3-41: Metformin - po (tab) 500 mg_DiCicco 2000**
+
+<br>
+<br>
+
+<a id="figure-3-42"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/40_time_profile_plot_Metformin_po__500_mg__Jang_2016__n_20__tab__fast.png)
+
+**Figure 3-42: Metformin - po (tab) 500 mg_Jang 2016**
+
+<br>
+<br>
+
+<a id="figure-3-43"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/41_time_profile_plot_Metformin_po__500_mg__Kim_2014__n_23__tab__fast.png)
+
+**Figure 3-43: Metformin - po (tab) 500 mg_Kim 2014**
+
+<br>
+<br>
+
+<a id="figure-3-44"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/42_time_profile_plot_Metformin_po__500_mg__Manitpisitkul_2014__n_18__tab__fast.png)
+
+**Figure 3-44: Metformin - po (tab) 500 mg_Manitpisitkul 2014**
+
+<br>
+<br>
+
+<a id="figure-3-45"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/43_time_profile_plot_Metformin_po__500_mg__Oh_2016__n_20__tab__fast.png)
+
+**Figure 3-45: Metformin - po (tab) 500 mg_Oh 2016**
+
+<br>
+<br>
+
+<a id="figure-3-46"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/44_time_profile_plot_Metformin_po__750_mg__Cho_2011__n_16__tab__fast.png)
+
+**Figure 3-46: Metformin - po (tab) 750 mg_Cho 2011**
+
+<br>
+<br>
+
+<a id="figure-3-47"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/45_time_profile_plot_Metformin_po__750_mg__Cho_2014__n_12__tab__fast.png)
+
+**Figure 3-47: Metformin - po (tab) 750 mg_Cho 2014**
+
+<br>
+<br>
+
+<a id="figure-3-48"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/46_time_profile_plot_Metformin_po__750_mg__Ding_2014__n_20__tab__fast.png)
+
+**Figure 3-48: Metformin - po (tab) 750 mg tid_Ding 2014**
+
+<br>
+<br>
+
+<a id="figure-3-49"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/47_time_profile_plot_Metformin_po__850_mg__Chen_2009__n_14__tab__fast.png)
+
+**Figure 3-49: Metformin - po (tab) 850 mg_Chen 2009**
+
+<br>
+<br>
+
+<a id="figure-3-50"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/48_time_profile_plot_Metformin_po__850_mg__Robert_2003__WholeBlood__n_6__tab__fed.png)
+
+**Figure 3-50: Metformin - po (tab) 850 mg_Robert 2003**
+
+<br>
+<br>
+
+<a id="figure-3-51"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/49_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
+
+**Figure 3-51: Metformin - po (tab) 850 mg_Sambol 1995**
+
+<br>
+<br>
+
+<a id="figure-3-52"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/50_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
+
+**Figure 3-52: Metformin - po (tab) 850 mg_Sambol 1995 - fe urine**
+
+<br>
+<br>
+
+<a id="figure-3-53"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/51_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
+
+**Figure 3-53: Metformin - po (tab) 850 mg_Sambol 1996a**
+
+<br>
+<br>
+
+<a id="figure-3-54"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/52_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
+
+**Figure 3-54: Metformin - po (tab) 850 mg_Sambol 1996a - fe urine**
+
+<br>
+<br>
+
+<a id="figure-3-55"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/53_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
+
+**Figure 3-55: Metformin - po (tab) 850 mg_Hibma 2016**
+
+<br>
+<br>
+
+<a id="figure-3-56"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/54_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
+
+**Figure 3-56: Metformin - po (tab) 850 mg_Hibma 2016 - fe urine**
+
+<br>
+<br>
+
+<a id="figure-3-57"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/55_time_profile_plot_Metformin_po__850_mg_tid__Sambol_1996a__n_9__tab__fast.png)
+
+**Figure 3-57: Metformin - po (tab) 850 mg tid_Sambol 1996a**
+
+<br>
+<br>
+
+<a id="figure-3-58"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/56_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
+
+**Figure 3-58: Metformin - po (tab) 1000 mg_Johansson 2014**
+
+<br>
+<br>
+
+<a id="figure-3-59"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/57_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
+
+**Figure 3-59: Metformin - po (tab) 1000 mg_Johansson 2014 - fe urine**
+
+<br>
+<br>
+
+<a id="figure-3-60"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/58_time_profile_plot_Metformin_po_1000_mg__Gan_2016__n_27__tab__fast.png)
+
+**Figure 3-60: Metformin - po (tab) 1000 mg_Gan 2016**
+
+<br>
+<br>
+
+<a id="figure-3-61"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/59_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
+
+**Figure 3-61: Metformin - po (tab) 1500 mg_Tucker 1981**
+
+<br>
+<br>
+
+<a id="figure-3-62"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/60_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
+
+**Figure 3-62: Metformin - po (tab) 1500 mg_Tucker 1981 - fe urine**
+
+<br>
+<br>
+
+<a id="figure-3-63"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/61_time_profile_plot_Metformin_po__850_mg__Morrissey_2016__n_12__tab__fast.png)
+
+**Figure 3-63: Metformin - po (tab) 850 mg_Morrissey 2016**
 
 <br>
 <br>
@@ -733,7 +930,7 @@ The presented PBPK model adequately describes the intravenous and oral pharmacok
 **Ding 2014** Ding Y, Jia Y, Song Y, et al (2014) The effect of lansoprazole, an OCT inhibitor, on metformin pharmacokinetics in healthy subjects. Eur J Clin Pharmacol 70:141–146. https://doi.org/10.1007/s00228-013-1604-7
 
 **FDA 2017** US Food and Drug Administration (2017) Drug development and drug interactions: Table
-of substrates, inhibitors and inducers. https://www.fda.gov/drugs/drug-interactions/labeling/drug-development-and-drug-interactions-table-substrates-inhibitors-and-inducers
+of substrates, inhibitors and inducers. https://www.fda.gov/drugs/drug-interactions-labeling/drug-development-and-drug-interactions-table-substrates-inhibitors-and-inducers
 
 **Gan 2016** Gan L, Jiang X, Mendonza A, et al (2016) Pharmacokinetic drug-drug interaction assessment of LCZ696 (an angiotensin receptor neprilysin inhibitor) with omeprazole, metformin or levonorgestrel-ethinyl estradiol in healthy subjects. Clin Pharmacol Drug Dev 5:27–39. https://doi.org/10.1002/cpdd.181
 
@@ -756,6 +953,8 @@ of substrates, inhibitors and inducers. https://www.fda.gov/drugs/drug-interacti
 **Kolesnikov 2015**Kolesnikov N, Hastings E, Keays M, et al (2015) ArrayExpress update—simplifying data submissions. Nucleic Acids Research 43:D1113–D1116. https://doi.org/10.1093/nar/gku1057
 
 **Manitpisitkul 2014** Manitpisitkul P, Curtin CR, Shalayda K, et al (2014) Pharmacokinetic interactions between topiramate and pioglitazone and metformin. Epilepsy Res 108:1519–1532. https://doi.org/10.1016/j.eplepsyres.2014.08.013
+
+**Marathe 2000** Marathe PH, Wen Y, Norton J, Greene DS, Barbhaiya RH, Wilding IR. Effect of altered gastric emptying and gastrointestinal motility on metformin absorption. Br J Clin Pharmacol. 50:325–332. doi: 10.1046/j.1365-2125.2000.00264.x.
 
 **Masuda 2006** Masuda S, Terada T, Yonezawa A, et al (2006) Identification and functional characterization of a new human kidney-specific H+/organic cation antiporter, kidney-specific multidrug and toxin extrusion 2. J Am Soc Nephrol 17:2127–2135. https://doi.org/10.1681/asn.2006030205
 
@@ -812,7 +1011,7 @@ digestive tract. Diabetes Research and Clinical Practice 4:223–229
 
 **Yin 2016** Yin J, Duan H, Wang J (2016) Impact of Substrate-Dependent Inhibition on Renal Organic Cation Transporters hOCT2 and hMATE1/2-K-Mediated Drug Transport and Intracellular Accumulation. J Pharmacol Exp Ther 359:401–410. https://doi.org/10.1124/jpet.116.236158
 
-**Zhou 2007** Zhou M, Xia L, Wang J (2007) Metformin Transport by a Newly Cloned Proton-Stimulated Organic Cation Transporter (Plasma Membrane Monoamine Transporter) Expressed in Human Intestine. Drug Metab Dispos 35:1956–1962 https://doi: 10.1124/dmd.107.015495.
+**Zhou 2007** Zhou M, Xia L, Wang J (2007) Metformin Transport by a Newly Cloned Proton-Stimulated Organic Cation Transporter (Plasma Membrane Monoamine Transporter) Expressed in Human Intestine. Drug Metab Dispos 35:1956–1962. https://doi.org/10.1124/dmd.107.015495
 
 **Zhou 2009** Zhou SF, Zhou ZW, Yang LP, Cai JP (2009) Substrates, inducers, inhibitors and structure-activity relationships of human cytochrome P450 2C9 and implications in drug development. Current Medicinal Chemistry 16:3480–3675. https://doi.org/10.2174/092986709789057635
 
