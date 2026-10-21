@@ -230,23 +230,23 @@ The compound parameter values of the final PBPK model are illustrated below.
 
 #### Parameters
 
-Name                                             | Value                   | Value Origin                                                                                        | Alternative | Default
------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------- | ----------- | -------
-Solubility at reference pH                       | 350.9 mg/ml             |                                                                                                     | Measurement | True   
-Reference pH                                     | 6.8                     |                                                                                                     | Measurement | True   
-Lipophilicity                                    | -1.43 Log Units         |                                                                                                     | Measurement | True   
-Fraction unbound (plasma, reference value)       | 100 %                   |                                                                                                     | Measurement | True   
-Specific intestinal permeability (transcellular) | 8.4891040357E-07 cm/min | Parameter Identification-Parameter Identification-Value updated from '17_final' on 2019-04-09 09:52 | Fit         | True   
-Is small molecule                                | Yes                     |                                                                                                     |             |        
-Molecular weight                                 | 129.1636 g/mol          |                                                                                                     |             |        
-Plasma protein binding partner                   | Albumin                 |                                                                                                     |             |        
+Name                                             | Value                   | Value Origin                                      | Alternative | Default
+------------------------------------------------ | ----------------------- | ------------------------------------------------- | ----------- | -------
+Solubility at reference pH                       | 350.9 mg/ml             |                                                   | Measurement | True   
+Reference pH                                     | 6.8                     |                                                   | Measurement | True   
+Lipophilicity                                    | -1.43 Log Units         |                                                   | Measurement | True   
+Fraction unbound (plasma, reference value)       | 100 %                   |                                                   | Measurement | True   
+Specific intestinal permeability (transcellular) | 4.2722322162E-07 cm/min | Parameter Identification-Parameter Identification | Fit         | True   
+Is small molecule                                | Yes                     |                                                   |             |        
+Molecular weight                                 | 129.1636 g/mol          |                                                   |             |        
+Plasma protein binding partner                   | Albumin                 |                                                   |             |        
 
 #### Calculation methods
 
-Name                    | Value          
------------------------ | ---------------
-Partition coefficients  | PK-Sim Standard
-Cellular permeabilities | PK-Sim Standard
+Name                    | Value                                        
+----------------------- | ---------------------------------------------
+Partition coefficients  | PK-Sim Standard                              
+Cellular permeabilities | Charge dependent Schmitt normalized to PK-Sim
 
 #### Processes
 
@@ -266,11 +266,12 @@ Molecule: OCT1
 
 ###### Parameters
 
-Name                      | Value                    | Value Origin                                     
-------------------------- | ------------------------ | -------------------------------------------------
-Transporter concentration | 1 µmol/l                 |                                                  
-Vmax                      | 641.185138023 µmol/l/min | Parameter Identification-Parameter Identification
-Km                        | 1180 µmol/l              |                                                  
+Name                      | Value               | Value Origin                                     
+------------------------- | ------------------- | -------------------------------------------------
+Transporter concentration | 1 µmol/l            |                                                  
+Vmax                      | 0 µmol/l/min        |                                                  
+Km                        | 1180 µmol/l         | Parameter Identification-Parameter Identification
+kcat                      | 641.185138023 1/min | Parameter Identification-Parameter Identification
 
 ##### Transport Protein: OCT2-Paper
 
@@ -278,23 +279,25 @@ Molecule: OCT2
 
 ###### Parameters
 
-Name                      | Value               | Value Origin                                     
-------------------------- | ------------------- | -------------------------------------------------
-Transporter concentration | 1 µmol/l            |                                                  
-Vmax                      | 17479.74 µmol/l/min | Parameter Identification-Parameter Identification
-Km                        | 810 µmol/l          |                                                  
+Name                      | Value                 | Value Origin                                     
+------------------------- | --------------------- | -------------------------------------------------
+Transporter concentration | 1 µmol/l              |                                                  
+Vmax                      | 0 µmol/l/min          |                                                  
+Km                        | 810 µmol/l            |                                                  
+kcat                      | 51723.791476854 1/min | Parameter Identification-Parameter Identification
 
-##### Transport Protein: MATE1-Paper
+##### Transport Protein: MATE2K-Paper
 
-Molecule: MATE1
+Molecule: MATE2K
 
 ###### Parameters
 
-Name                      | Value             | Value Origin                                     
-------------------------- | ----------------- | -------------------------------------------------
-Transporter concentration | 1 µmol/l          |                                                  
-Vmax                      | 165.69 µmol/l/min | Parameter Identification-Parameter Identification
-Km                        | 283 µmol/l        | Parameter Identification-Parameter Identification
+Name                      | Value                | Value Origin                                     
+------------------------- | -------------------- | -------------------------------------------------
+Transporter concentration | 1 µmol/l             |                                                  
+Vmax                      | 0 µmol/l/min         |                                                  
+Km                        | 283 µmol/l           | Parameter Identification-Parameter Identification
+kcat                      | 165.6886071792 1/min | Parameter Identification-Parameter Identification
 
 ##### Transport Protein: PMAT-Paper
 
@@ -302,12 +305,12 @@ Molecule: PMAT
 
 ###### Parameters
 
-Name                      | Value                    | Value Origin                                                                                       
-------------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------
-Transporter concentration | 1 µmol/l                 |                                                                                                    
-Vmax                      | 76.4673688119 µmol/l/min | Parameter Identification-Parameter Identification-Value updated from '17_final' on 2019-04-09 09:51
-Km                        | 367.5702930377 µmol/l    | Parameter Identification-Parameter Identification-Value updated from '17_final' on 2019-04-09 09:52
-Hill coefficient          | 3                        |                                                                                                    
+Name                      | Value                    | Value Origin                                     
+------------------------- | ------------------------ | -------------------------------------------------
+Transporter concentration | 1 µmol/l                 |                                                  
+Vmax                      | 76.4673688119 µmol/l/min | Parameter Identification-Parameter Identification
+Km                        | 367.5702930377 µmol/l    | Parameter Identification-Parameter Identification
+Hill coefficient          | 3                        |                                                  
 
 ## 3.2 Metformin Diagnostics Plots<a id="32"></a>
 
@@ -321,11 +324,11 @@ The first plot shows observed versus simulated plasma concentration, the second 
 
 |Group                                              |GMFE |
 |:--------------------------------------------------|:----|
-|Metformin iv (model building)                      |1.89 |
-|Metformin iv (model verification)                  |2.23 |
-|Metformin oral administration (model building)     |1.57 |
-|Metformin oral administration (model verification) |1.74 |
-|All                                                |1.73 |
+|Metformin iv (model building)                      |1.31 |
+|Metformin iv (model verification)                  |1.37 |
+|Metformin oral administration (model building)     |1.42 |
+|Metformin oral administration (model verification) |1.35 |
+|All                                                |1.36 |
 
 <br>
 <br>
@@ -358,7 +361,7 @@ Simulated versus observed concentration-time profiles of all data listed in [Sec
 
 ![](images/006_section_3/009_section_33/010_section_331/1_time_profile_plot_Metformin_iv___0_0014_mg__Gormsen_2016__n_4.png)
 
-**Figure 3-3: Metformin - iv, 0.0014 mg_Gormsen 2016**
+**Figure 3-3: Time Profile Analysis**
 
 <br>
 <br>
@@ -367,540 +370,342 @@ Simulated versus observed concentration-time profiles of all data listed in [Sec
 
 ![](images/006_section_3/009_section_33/010_section_331/2_time_profile_plot_Metformin_iv__250_mg__Tucker_1981__n_4.png)
 
-**Figure 3-4: Metformin - iv, 250 mg_Tucker 1981**
+**Figure 3-4: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-5"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/3_time_profile_plot_Metformin_iv__250_mg__Tucker_1981__n_4.png)
+![](images/006_section_3/009_section_33/010_section_331/3_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
 
-**Figure 3-5: Metformin - iv, 250 mg_Tucker 1981 - fe urine**
+**Figure 3-5: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-6"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/4_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
+![](images/006_section_3/009_section_33/010_section_331/4_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
 
-**Figure 3-6: Metformin - iv, 1000 mg_Sirtori 1978**
+**Figure 3-6: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-7"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/5_time_profile_plot_Metformin_iv_1000_mg__Sirtori_1978__n_5.png)
+![](images/006_section_3/009_section_33/010_section_331/5_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
 
-**Figure 3-7: Metformin - iv, 1000 mg_Sirtori 1978 - fe urine**
+**Figure 3-7: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-8"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/6_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/6_time_profile_plot_Metformin_po___0_0008_mg__Gormsen_2016__n_3__sol__fast.png)
 
-**Figure 3-8: Metformin - po (sol) 10 mg_Stopfer 2018**
+**Figure 3-8: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-9"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/7_time_profile_plot_Metformin_po__10_mg__Stopfer_2018__n_24__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/7_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
 
-**Figure 3-9: Metformin - po (sol) 10 mg_Stopfer 2018 - fe urine**
+**Figure 3-9: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-10"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/8_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/8_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
 
-**Figure 3-10: Metformin - po (sol) 500 mg_Boehringer 2018**
+**Figure 3-10: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-11"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/9_time_profile_plot_Metformin_po__500_mg__Boehringer_2018__n_13__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/9_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
 
-**Figure 3-11: Metformin - po (sol) 500 mg_Boehringer 2018 - fe urine**
+**Figure 3-11: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-12"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/10_time_profile_plot_Metformin_po___0_0008_mg__Gormsen_2016__n_3__sol__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/10_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
 
-**Figure 3-12: Metformin - po (sol) 0.0008 mg, Gormsen 2016**
+**Figure 3-12: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-13"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/11_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/11_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-13: Metformin - po (tab) 500 mg_Stopfer 2016**
+**Figure 3-13: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-14"></a>
 
-![](images/006_section_3/009_section_33/010_section_331/12_time_profile_plot_Metformin_po__500_mg__Stopfer_2016__n_20__tab__fast.png)
+![](images/006_section_3/009_section_33/010_section_331/12_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-14: Metformin - po (tab) 500 mg_Stopfer 2016 - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-15"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/13_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
-
-**Figure 3-15: Metformin - po (sol) 850 mg_Sambol 1996b**
-
-<br>
-<br>
-
-<a id="figure-3-16"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/14_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__sol__fast.png)
-
-**Figure 3-16: Metformin - po (sol) 850 mg_Sambol 1996b - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-17"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/15_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
-
-**Figure 3-17: Metformin - po (tab) 850 mg_Sambol 1996b**
-
-<br>
-<br>
-
-<a id="figure-3-18"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/16_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fast.png)
-
-**Figure 3-18: Metformin - po (tab) 850 mg_Sambol 1996b - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-19"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/17_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
-
-**Figure 3-19: Metformin - po (tab) 850 mg_Sambol 1996a**
-
-<br>
-<br>
-
-<a id="figure-3-20"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/18_time_profile_plot_Metformin_po__850_mg__Sambol_1996b__n_24__tab__fed.png)
-
-**Figure 3-20: Metformin - po (tab) 850 mg_Sambol 1996a - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-21"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/19_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-21: Metformin - po (tab) 1700 mg_Sambol 1996a**
-
-<br>
-<br>
-
-<a id="figure-3-22"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/20_time_profile_plot_Metformin_po_1700_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-22: Metformin - po (tab) 1700 mg_Sambol 1996a - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-23"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/21_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-23: Metformin - po (tab) 2550 mg_Sambol 1996a**
-
-<br>
-<br>
-
-<a id="figure-3-24"></a>
-
-![](images/006_section_3/009_section_33/010_section_331/22_time_profile_plot_Metformin_po_2550_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-24: Metformin - po (tab) 2550 mg_Sambol 1996a - fe urine**
+**Figure 3-14: Time Profile Analysis**
 
 <br>
 <br>
 
 ### 3.3.2 Model Verification<a id="332"></a>
 
+<a id="figure-3-15"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/13_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
+
+**Figure 3-15: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-16"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/14_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
+
+**Figure 3-16: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-17"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/15_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
+
+**Figure 3-17: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-18"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/16_time_profile_plot_Metformin_po__500_mg__Caille_1993__n_24__tab__fed.png)
+
+**Figure 3-18: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-19"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/17_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
+
+**Figure 3-19: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-20"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/18_time_profile_plot_Metformin_po__500_mg__Najib_2002__n_24__tab__fast.png)
+
+**Figure 3-20: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-21"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/19_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
+
+**Figure 3-21: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-22"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/20_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
+
+**Figure 3-22: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-23"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/21_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
+
+**Figure 3-23: Time Profile Analysis**
+
+<br>
+<br>
+
+<a id="figure-3-24"></a>
+
+![](images/006_section_3/009_section_33/011_section_332/22_time_profile_plot_Metformin_po__500_mg__DiCicco_2000__n_16__tab__fed.png)
+
+**Figure 3-24: Time Profile Analysis**
+
+<br>
+<br>
+
 <a id="figure-3-25"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/23_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
+![](images/006_section_3/009_section_33/011_section_332/23_time_profile_plot_Metformin_po__500_mg__Jang_2016__n_20__tab__fast.png)
 
-**Figure 3-25: Metformin - iv 500 mg_Pentikainen 1979**
+**Figure 3-25: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-26"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/24_time_profile_plot_Metformin_iv__500_mg__Pentikainen_1979__n_3.png)
+![](images/006_section_3/009_section_33/011_section_332/24_time_profile_plot_Metformin_po__500_mg__Kim_2014__n_23__tab__fast.png)
 
-**Figure 3-26: Metformin - iv 500 mg_Pentikainen 1979 - fe urine**
+**Figure 3-26: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-27"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/25_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/25_time_profile_plot_Metformin_po__500_mg__Manitpisitkul_2014__n_18__tab__fast.png)
 
-**Figure 3-27: Metformin - po (tab) 250 mg_Somogyi 1987**
+**Figure 3-27: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-28"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/26_time_profile_plot_Metformin_po__250_mg__Somogyi_1987__n_7__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/26_time_profile_plot_Metformin_po__500_mg__Oh_2016__n_20__tab__fast.png)
 
-**Figure 3-28: Metformin - po (tab) 250 mg_Somogyi 1987 - fe urine**
+**Figure 3-28: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-29"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/27_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/27_time_profile_plot_Metformin_po__750_mg__Cho_2011__n_16__tab__fast.png)
 
-**Figure 3-29: Metformin - po (tablet) 500 mg_Wang 2008**
+**Figure 3-29: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-30"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/28_time_profile_plot_Metformin_po__500_mg__Wang_2008__n_6__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/28_time_profile_plot_Metformin_po__750_mg__Cho_2014__n_12__tab__fast.png)
 
-**Figure 3-30: Metformin - po (tablet) 500 mg_Wang 2008 - fe urine**
+**Figure 3-30: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-31"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/29_time_profile_plot_Metformin_po__500_mg__Caille_1993__n_24__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/29_time_profile_plot_Metformin_po__750_mg__Ding_2014__n_20__tab__fast.png)
 
-**Figure 3-31: Metformin - po (tab) 500 mg_Caille 1993**
+**Figure 3-31: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-32"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/30_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/30_time_profile_plot_Metformin_po__850_mg__Chen_2009__n_14__tab__fast.png)
 
-**Figure 3-32: Metformin - po (tab) 500 mg_Gusler 2001**
+**Figure 3-32: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-33"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/31_time_profile_plot_Metformin_po__500_mg__Gusler_2001__n_14__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/31_time_profile_plot_Metformin_po__850_mg__Robert_2003__WholeBlood__n_6__tab__fed.png)
 
-**Figure 3-33: Metformin - po (tab) 500 mg_Gusler 2001 - fe urine**
+**Figure 3-33: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-34"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/32_time_profile_plot_Metformin_po__500_mg__Najib_2002__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/32_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
 
-**Figure 3-34: Metformin - po (tab) 500 mg_Najib 2002**
+**Figure 3-34: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-35"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/33_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/33_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-35: Metformin - po (tab) 500 mg_Pentikainen 1979**
+**Figure 3-35: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-36"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/34_time_profile_plot_Metformin_po__500_mg__Pentikainen_1979__n_5__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/34_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
 
-**Figure 3-36: Metformin - po (tab) 500 mg_Pentikainen 1979 - fe urine**
+**Figure 3-36: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-37"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/35_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/35_time_profile_plot_Metformin_po__850_mg_tid__Sambol_1996a__n_9__tab__fast.png)
 
-**Figure 3-37: Metformin - po (tab) 500 mg_Sambol 1996b**
+**Figure 3-37: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-38"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/36_time_profile_plot_Metformin_po__500_mg__Sambol_1996b__n_24__tab__fast.png)
+![](images/006_section_3/009_section_33/011_section_332/36_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
 
-**Figure 3-38: Metformin - po (tab) 500 mg_Sambol 1996b - fe urine**
+**Figure 3-38: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-39"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/37_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/37_time_profile_plot_Metformin_po_1000_mg__Gan_2016__n_27__tab__fast.png)
 
-**Figure 3-39: Metformin - po (tab) 500 mg_Tucker 1981**
+**Figure 3-39: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-40"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/38_time_profile_plot_Metformin_po__500_mg__Tucker_1981__n_4__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/38_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
 
-**Figure 3-40: Metformin - po (tab) 500 mg_Tucker 1981 - fe urine**
+**Figure 3-40: Time Profile Analysis**
 
 <br>
 <br>
 
 <a id="figure-3-41"></a>
 
-![](images/006_section_3/009_section_33/011_section_332/39_time_profile_plot_Metformin_po__500_mg__DiCicco_2000__n_16__tab__fed.png)
+![](images/006_section_3/009_section_33/011_section_332/39_time_profile_plot_Metformin_po__850_mg__Morrissey_2016__n_12__tab__fast.png)
 
-**Figure 3-41: Metformin - po (tab) 500 mg_DiCicco 2000**
-
-<br>
-<br>
-
-<a id="figure-3-42"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/40_time_profile_plot_Metformin_po__500_mg__Jang_2016__n_20__tab__fast.png)
-
-**Figure 3-42: Metformin - po (tab) 500 mg_Jang 2016**
-
-<br>
-<br>
-
-<a id="figure-3-43"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/41_time_profile_plot_Metformin_po__500_mg__Kim_2014__n_23__tab__fast.png)
-
-**Figure 3-43: Metformin - po (tab) 500 mg_Kim 2014**
-
-<br>
-<br>
-
-<a id="figure-3-44"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/42_time_profile_plot_Metformin_po__500_mg__Manitpisitkul_2014__n_18__tab__fast.png)
-
-**Figure 3-44: Metformin - po (tab) 500 mg_Manitpisitkul 2014**
-
-<br>
-<br>
-
-<a id="figure-3-45"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/43_time_profile_plot_Metformin_po__500_mg__Oh_2016__n_20__tab__fast.png)
-
-**Figure 3-45: Metformin - po (tab) 500 mg_Oh 2016**
-
-<br>
-<br>
-
-<a id="figure-3-46"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/44_time_profile_plot_Metformin_po__750_mg__Cho_2011__n_16__tab__fast.png)
-
-**Figure 3-46: Metformin - po (tab) 750 mg_Cho 2011**
-
-<br>
-<br>
-
-<a id="figure-3-47"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/45_time_profile_plot_Metformin_po__750_mg__Cho_2014__n_12__tab__fast.png)
-
-**Figure 3-47: Metformin - po (tab) 750 mg_Cho 2014**
-
-<br>
-<br>
-
-<a id="figure-3-48"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/46_time_profile_plot_Metformin_po__750_mg__Ding_2014__n_20__tab__fast.png)
-
-**Figure 3-48: Metformin - po (tab) 750 mg tid_Ding 2014**
-
-<br>
-<br>
-
-<a id="figure-3-49"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/47_time_profile_plot_Metformin_po__850_mg__Chen_2009__n_14__tab__fast.png)
-
-**Figure 3-49: Metformin - po (tab) 850 mg_Chen 2009**
-
-<br>
-<br>
-
-<a id="figure-3-50"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/48_time_profile_plot_Metformin_po__850_mg__Robert_2003__WholeBlood__n_6__tab__fed.png)
-
-**Figure 3-50: Metformin - po (tab) 850 mg_Robert 2003**
-
-<br>
-<br>
-
-<a id="figure-3-51"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/49_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
-
-**Figure 3-51: Metformin - po (tab) 850 mg_Sambol 1995**
-
-<br>
-<br>
-
-<a id="figure-3-52"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/50_time_profile_plot_Metformin_po__850_mg__Sambol_1995__WholeBlood__n_6__tab__fast.png)
-
-**Figure 3-52: Metformin - po (tab) 850 mg_Sambol 1995 - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-53"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/51_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-53: Metformin - po (tab) 850 mg_Sambol 1996a**
-
-<br>
-<br>
-
-<a id="figure-3-54"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/52_time_profile_plot_Metformin_po__850_mg__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-54: Metformin - po (tab) 850 mg_Sambol 1996a - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-55"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/53_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
-
-**Figure 3-55: Metformin - po (tab) 850 mg_Hibma 2016**
-
-<br>
-<br>
-
-<a id="figure-3-56"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/54_time_profile_plot_Metformin_po__850_mg__Hibma_2016__n_12__tab__fast.png)
-
-**Figure 3-56: Metformin - po (tab) 850 mg_Hibma 2016 - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-57"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/55_time_profile_plot_Metformin_po__850_mg_tid__Sambol_1996a__n_9__tab__fast.png)
-
-**Figure 3-57: Metformin - po (tab) 850 mg tid_Sambol 1996a**
-
-<br>
-<br>
-
-<a id="figure-3-58"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/56_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
-
-**Figure 3-58: Metformin - po (tab) 1000 mg_Johansson 2014**
-
-<br>
-<br>
-
-<a id="figure-3-59"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/57_time_profile_plot_Metformin_po_1000_mg__Johansson_2014__n_14__tab__fast.png)
-
-**Figure 3-59: Metformin - po (tab) 1000 mg_Johansson 2014 - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-60"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/58_time_profile_plot_Metformin_po_1000_mg__Gan_2016__n_27__tab__fast.png)
-
-**Figure 3-60: Metformin - po (tab) 1000 mg_Gan 2016**
-
-<br>
-<br>
-
-<a id="figure-3-61"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/59_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
-
-**Figure 3-61: Metformin - po (tab) 1500 mg_Tucker 1981**
-
-<br>
-<br>
-
-<a id="figure-3-62"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/60_time_profile_plot_Metformin_po_1500_mg__Tucker_1981__n_4__tab__fed.png)
-
-**Figure 3-62: Metformin - po (tab) 1500 mg_Tucker 1981 - fe urine**
-
-<br>
-<br>
-
-<a id="figure-3-63"></a>
-
-![](images/006_section_3/009_section_33/011_section_332/61_time_profile_plot_Metformin_po__850_mg__Morrissey_2016__n_12__tab__fast.png)
-
-**Figure 3-63: Metformin - po (tab) 850 mg_Morrissey 2016**
+**Figure 3-41: Time Profile Analysis**
 
 <br>
 <br>
