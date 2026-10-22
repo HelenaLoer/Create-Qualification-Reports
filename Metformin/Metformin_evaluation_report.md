@@ -2,7 +2,7 @@
 
 | Version                                         | master-OSP12.2                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------ |
-| based on *Model Snapshot* and *Evaluation Plan* | https://github.com/Open-Systems-Pharmacology/Metformin-Model/releases/tag/vmaster |
+| based on *Model Snapshot* and *Evaluation Plan* | https://github.com/Open-Systems-Pharmacology/Metformin-Model/releases/tag/master |
 | OSP Version                                     | 12.2                                                          |
 | Qualification Framework Version                 | 3.5                                                          |
 
