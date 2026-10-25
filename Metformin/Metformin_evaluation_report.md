@@ -34,12 +34,12 @@ https://github.com/Open-Systems-Pharmacology/OSP-PBPK-Model-Library/
 
 # 1 Introduction<a id="1"></a>
 
-Hello Hello. The presented model building and evaluation report evaluates the performance of a PBPK model for metformin in healthy adults.
+The presented model building and evaluation report evaluates the performance of a PBPK model for metformin in healthy adults.
 
 The herein presented model represents an update of the metformin model published by Hanke et al. ([Hanke 2020](#5-references)).  
 
 Metformin is widely used as first-line treatment of type 2 diabetes. It is a highly hydrophilic compound, positively
-charged at physiological pH and depends on active transport for its absorption, distribution and excretion. The absorption of metformin is saturable and reported to be restricted to the upper intestine ([Vidon 1988](#5-references)). The excretion of metformin is mainly mediated via the sequential action of OCT2 and MATE in the kidney, with a moderate contribution of renal glomerular filtration (approximately 20 %). Metformin is recommended by the FDA as OCT2/MATE victim drug for the use in clinical DDI studies and drug labeling ([FDA 2017](#5-references)).
+charged at physiological pH and depends on active transport for its absorption, distribution and excretion. The absorption of metformin is saturable and on the one hand reported to be restricted to the upper intestine ([Vidon 1988](#5-references)) while on the other hand sources established colonic absorption ([Paleari 2018](#5-references)). The excretion of metformin is mainly mediated via the sequential action of OCT2 and MATE in the kidney, with a moderate contribution of renal glomerular filtration (approximately 20 %). Metformin is recommended by the FDA as OCT2/MATE victim drug for the use in clinical DDI studies and drug labeling ([FDA 2017](#5-references)).
 
 The herein presented PBPK model of metformin PBPK model has been developed and evaluated by comparing simulations to observed data of both intravenously and orally administered metformin covering a dosing range from 0.001 to 2550 mg.
 
@@ -67,7 +67,7 @@ Virtual mean individuals were generated for each study according to the publishe
 
 The clinical datasets for metformin PBPK modeling were divided into a model building dataset for model building and a test dataset for model evaluation and verification. Both datasets are presented in [Section 2.2](#22-data-used).
 
-A specific set of parameters ([Section 2.3.4.](#model-parameters-and-assumptions-identification)) were optimized to describe the disposition of metformin using the Parameter Identification module provided in PK-Sim®. To limit the parameters to be optimized during model building, the minimal number of processes necessary to mechanistically describe the pharmacokinetics and drug-drug interactions (DDIs) of the modeled drugs were implemented into the models. The saturable absorption is implemented via PMAT and OCT1 in the small intestine. As late absorption of orally administered metformin is neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. For an improved capture of terminal half-life and to minimize drug accumulation over time in tissues the permeability calculation methods and selected specific permeabilities were optimized (i.e., liver, kidney, mucosa, and brain). No information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained. Therefore, the passive permeability from the intracellular to the interstitial space of the small intestinal mucosa was optimized. Metformin is primarily absorbed from the small intestine ([Marathe 2000](#5-references)). In the updated model, to minimize absorption in the large intestine without causing accumulation of the drug inside of the intracellular space of the mucosa, the solubility in the distal Colon and rectum was set to 0 mg/l. While solubility is not the underlying cause of limited absorption in vivo, this adjustment was used as a practical modeling workaround. Finally, in the latest version of the model, meal events were introduced for the fed state simulations. 
+A specific set of parameters ([Section 2.3.4.](#model-parameters-and-assumptions-identification)) were optimized to describe the disposition of metformin using the Parameter Identification module provided in PK-Sim®. To limit the parameters to be optimized during model building, the minimal number of processes necessary to mechanistically describe the pharmacokinetics and drug-drug interactions (DDIs) of the modeled drugs were implemented into the models. The saturable absorption is implemented via PMAT and OCT1, mainly in the small intestine. In the original model, as late absorption of orally administered metformin was considered neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. Additionally, as no information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained, the passive permeability from intracellular to interstitial space of the small intestinal mucosa was optimized. In the updated model, to allow capture of late-phase pharmacokinetics following single and multiple oral dosing as well as intravenous administration, the expression profile for OCT1 was switched from Array to RT-PCR. Given the contradictory data regarding colonic absorption of metformin, the default expression in the large intestinal mucosa was kept unchanged. Moreover, in addition to refining the permeability from intracellular to interstitial space of the small intestinal mucosa, respective permeabilities were optimized for cecum, colon ascendens, and colon transversum, while setting the later segments colon descendens, colon sigmoid, and rectum to zero. Finally, in the updated model, the permeability values between plasma and blood cells were optimized to address the accumulation in red blood cells and capture the difference between plasma and whole blood metformin data.
 
 Details about input data (physicochemical, *in vitro* and clinical) can be found in [Section 2.2](#22-data-used).
 
@@ -130,13 +130,13 @@ The following publications were used for model building (training dataset) and m
 | 850 <sub>(c)<sub>| po, tablet, fasted, bid |plasma|test|[Chen 2009](#5-references)|
 | 850| po, tablet, fasted, sd |plasma|test|[Morrissey 2016](#5-references)|
 | 850| po, tablet, fed, sd |blood, plasma|test|[Robert 2003 ](#5-references)|
-| 850| po, tablet, fasted, sd |blood, plasma, excretion into urine|test|[Sambol 1995](#5-references)|
+| 850| po, tablet, fasted, sd |blood, plasma, excretion into urine|training|[Sambol 1995](#5-references)|
 | 850| po, tablet, fasted, sd |plasma, excretion into urine|test|[Sambol 1996a](#5-references)|
 | 850| po, tablet, fed, sd |plasma, excretion into urine|training|[Sambol 1996b](#5-references)|
 | 850| po, tablet, fed, sd |plasma, excretion into urine|training|[Sambol 1996b](#5-references)|
 | 850<sup>(c)</sup>| po, tablet, fasted, bid |plasma, excretion into urine|test|[Hibma 2016](#5-references)|
 | 850| po, tablet, fasted, tid |plasma|test|[Sambol 1996a](#5-references)|
-| 1000| po, tablet, fasted, sd |plasma, excretion into urine|test|[Johansson 2014](#5-references)|
+| 1000| po, tablet, fasted, sd |plasma, excretion into urine|training|[Johansson 2014](#5-references)|
 | 1000| po, tablet, fasted, qd |plasma|test|[Gan 2016](#5-references)|
 | 1500| po, tablet, fed, qd |plasma|test|[Tucker 1981](#5-references)|
 | 1700| po, tablet, fasted, sd |plasma, excretion into urine|training|[Sambol 1996a](#5-references)|
@@ -153,7 +153,7 @@ The following publications were used for model building (training dataset) and m
 ### 2.3.1 Absorption<a id="model-parameters-and-assumptions-absorption"></a>
 
 The parameter value for `Specific intestinal permeability` was optimized based on clinical oral data, see [Section 2.3.4](#model-parameters-and-assumptions-identification). The saturable
-absorption is implemented via PMAT and OCT1 in the small intestine. As late absorption of orally administered metformin is neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. Additionally, no information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained, therefore, the passive  basolateral permeability `(P (intracellular -> interstitial)` was optimized, see [Section 2.3.4](#model-parameters-and-assumptions-identification).
+absorption is implemented via PMAT and OCT1, mainly in the small intestine. In the original model, as late absorption of orally administered metformin was considered neither consistent with the reported plasma concentration time-profiles nor with the incomplete absorption of metformin, the relative expression of PMAT and OCT1 in the large intestinal mucosa was set to zero. Additionally, as no information regarding active transport processes at the basolateral side of the intestinal mucosa could be obtained, the passive permeability `P (intracellular -> interstitial)` of the small intestinal mucosa was optimized. In the updated model, to allow capture of late-phase pharmacokinetics following single and multiple oral dosing as well as intravenous administration, the expression profile for OCT1 was switched from Array to RT-PCR. Given the contradictory data regarding colonic absorption of metformin, the default expression in the large intestinal mucosa was kept unchanged. Moreover, in addition to refining the permeability from intracellular to interstitial space of the small intestinal mucosa, respective permeabilities were optimized for cecum, colon ascendens, and colon transversum, while setting the later segments colon descendens, colon sigmoid, and rectum to zero, see [Section 2.3.4](#model-parameters-and-assumptions-identification).
 
 The measured solubility of metformin hydrochloride
 in a phosphate buffer at pH 6.8 was used in the model (see [Section 2.2.1](#invitro-and-physico-chemical-data)).
@@ -166,9 +166,9 @@ Metformin is not bound to plasma proteins (fu = 100 %) (see [Section 2.2.1](#inv
 
 An important parameter influencing the resulting volume of distribution is lipophilicity. The reported experimental logP of -1.43 was used in this model (see [Section 2.2.1](#invitro-and-physico-chemical-data)). 
 
-After testing the available organ-plasma partition coefficient and cell permeability calculation methods built in PK-Sim®, observed clinical data was best described by choosing the partition coefficient calculation by `PK-SIM Standard` and cellular permeability calculation by `PK-SIM Standard`.
+After testing the available organ-plasma partition coefficient and cell permeability calculation methods built in PK-Sim®, observed clinical data was best described by choosing the partition coefficient calculation by `PK-SIM Standard` and cellular permeability calculation by `Charge dependent Schmitt normalized to PK-SIM`.
 
-The liver, kidney and brain permeabilities (i.e., (`(P (intracellular -> interstitial) liver periportal`, `(P (intracellular -> interstitial) liver pericentral` and (`(P (intracellular -> interstitial) kidney`) were optimized to avoid accumulation of drug in tissue and to capture observed PK profiles [Section 2.3.4](#model-parameters-and-assumptions-identification). 
+The permeability values between plasma and blood cells (`P (blood cells -> plasma)`, `P (plasma -> blood cells)`) were optimized to address the accumulation in red blood cells and capture the difference between plasma and whole blood metformin data.
 
 ### 2.3.3 Metabolism and Elimination<a id="model-parameters-and-assumptions-metabolism"></a>
 
@@ -177,11 +177,11 @@ The transport proteins involved in metformin PK were implemented in the model as
 
 * PMAT
 
-The PMAT expression profiles are based on high-sensitive real-time RT-PCR ([Nishimura 2005](#5-references)). Metabolic enzyme activity was described as saturable process following Hill kinetics, where the `PMAT Hill` was taken from literature and `Km`and `kcat` where optimized based on clinical data (see [Section 2.3.4](#model-parameters-and-assumptions-identification)).
+The PMAT expression profiles are based on high-sensitive real-time RT-PCR ([Nishimura 2005](#5-references)). Metabolic enzyme activity was described as saturable process following Hill kinetics, where the `PMAT Hill` was taken from literature and `Km` and `kcat` where optimized based on clinical data (see [Section 2.3.4](#model-parameters-and-assumptions-identification)).
 
 * OCT1
 
-The OCT1 expression profiles are based on Microarray expression data ([Kolesnikov 2015](#5-references)). Transporter activity was described as saturable process following Michaelis-Menten kinetics, where the `Km` was taken from literature and `kcat` was optimized based on clinical data (see [Section 2.3.4](#model-parameters-and-assumptions-identification)).
+The OCT1 expression profiles are based on high-sensitive real-time RT-PCR ([Nishimura 2005](#5-references)). Transporter activity was described as saturable process following Michaelis-Menten kinetics, where the `Km` was taken from literature and `kcat` was optimized based on clinical data (see [Section 2.3.4](#model-parameters-and-assumptions-identification)).
 
 * OCT2
 
@@ -202,14 +202,17 @@ This is the result of the final parameter identification.
 | `kcat` (PMAT)             | 76.47|1/min|
 | `Km` (PMAT)             |367.57 | µmol/l |
 | `kcat` (OCT1)            | 641.19 | 1/min |
-| `kcat` (OCT2)                    | 17479.74 | 1/min |
+| `kcat` (OCT2)                    | 51723.79 | 1/min |
 | `kcat` (MATE1)                    | 165.69 | 1/min |
-| `P(intracellular-interstitial) Kidney`| 4.02E-06 | cm/min |
-| `P(intracellular-interstitial) Liver`|4.83E-05 | cm/min |
-| `P(intracellular-interstitial) Brain`|0.02 | cm/min |
-| `Specific intestinal permeability`| 8.49E-07 | cm/min |
-| `P(intracellular-interstitial) mucosa` (Basolateral intestinal permeability)| 2.25E-05 | cm/min |
-| `Tablet dissolution fed Weibull Shape`| 0.08 | - |
+| `Specific intestinal permeability`| 4.27E-07 | cm/min |
+| `P (intracellular -> interstitial)` (Duodenum)| 2.78E-04 | cm/min |
+| `P (intracellular -> interstitial)` (Jejunum)| 2.27E-05 | cm/min |
+| `P (intracellular -> interstitial)` (Ileum)| 1.23E-05 | cm/min |
+| `P (intracellular -> interstitial)` (Cecum, colon ascendens)| 1.72E-05 | cm/min |
+| `P (intracellular -> interstitial)` (Colon transversum)| 6.34E-06 | cm/min |
+| `P (blood cells -> plasma)` | 4.16E-08 | cm/min |
+| `P (plasma -> blood cells)` | 7.70E-08 | cm/min |
+| `Tablet dissolution fed Weibull Shape`| 0.11 | - |
 | `Tablet dissolution fed Weibull Time`| 7.90 | min |
 
  
@@ -326,8 +329,8 @@ The first plot shows observed versus simulated plasma concentration, the second 
 |:--------------------------------------------------|:----|
 |Metformin iv (model building)                      |1.31 |
 |Metformin iv (model verification)                  |1.37 |
-|Metformin oral administration (model building)     |1.42 |
-|Metformin oral administration (model verification) |1.35 |
+|Metformin oral administration (model building)     |1.39 |
+|Metformin oral administration (model verification) |1.36 |
 |All                                                |1.36 |
 
 <br>
@@ -979,6 +982,8 @@ Survey (NHANES III). Tech. rep., Hyattsville, MD 20782
 **Oh 2016** Oh J, Chung H, Park S-I, et al (2016) Inhibition of the multidrug and toxin extrusion (MATE) transporter by pyrimethamine increases the plasma concentration of metformin but does not increase antihyperglycaemic activity in humans. Diabetes Obes Metab 18:104–108. https://doi.org/10.1111/dom.12577
 
 **Otsuka 2005** Otsuka M, Matsumoto T, Morimoto R, et al (2005) A human transporter protein that mediates the final excretion step for toxic organic cations. Proc Natl Acad Sci U S A 102:17923–17928. https://doi.org/10.1073/pnas.0506483102
+
+**Paleari 2018** Paleari L, Burhenne J, Weiss J, et al (2018) High accumulation of metformin in colonic tissue of subjects with diabetes or the metabolic syndrome. Gastroenterology 154:1543-1545. https://doi.org/10.1053/j.gastro.2017.12.040
 
 **Pentikäinen 1979** Pentikäinen PJ, Neuvonen PJ, Penttilä A (1979a) Pharmacokinetics of metformin after intravenous and oral administration to man. Eur J Clin Pharmacol 16:195–202. https://doi.org/10.1007/BF00562061
 
