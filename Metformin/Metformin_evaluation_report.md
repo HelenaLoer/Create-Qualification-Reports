@@ -289,9 +289,9 @@ Vmax                      | 0 µmol/l/min          |
 Km                        | 810 µmol/l            |                                                  
 kcat                      | 51723.791476854 1/min | Parameter Identification-Parameter Identification
 
-##### Transport Protein: MATE2K-Paper
+##### Transport Protein: MATE1-Paper
 
-Molecule: MATE2K
+Molecule: MATE1
 
 ###### Parameters
 
